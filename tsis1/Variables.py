@@ -7,7 +7,7 @@ x = 50
 #ex3
 x = 5
 y = 10
-print(x+y)
+print(x + y)
 
 #ex4
 x = 5
@@ -16,7 +16,7 @@ z = x + y
 print(z)
 
 #ex5
-x. y. z = "Orange", "Banana", "Cherry"
+x, y, z = "Orange", "Banana", "Cherry"
 
 #ex6
 x = y = z = "Orange"
