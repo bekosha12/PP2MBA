@@ -29,6 +29,8 @@ else:
     print("3")
 
 #ex5
+c = 10 #just for input
+d = 11 #just for input
 if a == b and c == d:
     print("Hello")
 
