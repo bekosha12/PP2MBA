@@ -269,3 +269,14 @@ def average_imdb_score_by_category(category):
 # print("Answer to movies ex3: ", movies_by_category(movies, "Romance"))
 # print("Answer to movies ex4: ", average_imdb_score(movies))
 # print("Answer to movies ex5: ", average_imdb_score_by_category(category = input()))
+
+
+
+# def triangle(n):
+#     while n != 0:
+#         print('*'*n)
+#         n -= 1
+
+# str = input()
+# n = int(str)
+# triangle(n)
