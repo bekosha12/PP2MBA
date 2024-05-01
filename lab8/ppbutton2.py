@@ -14,12 +14,10 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BUTTON_COLOR = (0, 128, 255)
 HOVER_COLOR = (255, 100, 70)
-TEXT_COLOR = WHITE
 
 # Font setup
 font = pygame.font.Font(None, 40)
-button_text = font.render('Click Me!', True, TEXT_COLOR)
-button_text_rect = button_text.get_rect()
+text = font.render('Click Me!', True, WHITE)
 
 # Button dimensions and properties
 button_width, button_height = 200, 50
@@ -29,6 +27,24 @@ button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
 # Images
 images = [pygame.image.load(f'image_{i}.png') for i in range(1, 11)]
 
+# Function to generate and display images above the button
+def generate_images():
+    # Generate random images
+    random_images = random.sample(images, 3)
+    print(random_images)
+    # Display images above the button
+    for i, img in enumerate(random_images):
+        img_rect = img.get_rect()
+        img_rect.center = (WIN_WIDTH // 4 * (i + 1), WIN_HEIGHT // 4)
+        img_rect.y = button_rect.top - img_rect.height - 20  # Position above the button
+        win.blit(img, img_rect)
+    
+    # Check for victory or jackpot
+    if len(set(random_images)) == 1:
+        print("Jackpot!")
+    elif len(set(random_images)) == 2:
+        print("Victory!")
+
 # Main loop
 running = True
 while running:
@@ -37,17 +53,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            # Check if the mouse click is inside the button
+            # Check if mouse click is inside the button
             if button_rect.collidepoint(event.pos):
-                # Generate random images
-                random_images = random.sample(images, 3)
-                print(random_images)
-                # Check for victory or jackpot
-                if len(set(random_images)) == 1:
-                    print("Jackpot!")
-                elif len(set(random_images)) == 2:
-                    print("Victory!")
-    
+                print("Button was clicked!")
+                generate_images()
+
     # Check for mouse hover on button
     mouse_pos = pygame.mouse.get_pos()
     if button_rect.collidepoint(mouse_pos):
@@ -58,8 +68,8 @@ while running:
     # Drawing to the screen
     win.fill(WHITE)
     pygame.draw.rect(win, current_button_color, button_rect)
-    win.blit(button_text, (button_rect.x + (button_width - button_text_rect.width) // 2,
-                           button_rect.y + (button_height - button_text_rect.height) // 2))
+    text_rect = text.get_rect(center=button_rect.center)
+    win.blit(text, text_rect)
     pygame.display.flip()
 
 # Quit Pygame
